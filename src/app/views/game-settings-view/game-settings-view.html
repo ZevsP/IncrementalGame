@@ -1,7 +1,37 @@
 <Div class="container-fluid d-flex flex-column justify-content-center">
-    <h1>Game</h1>
+    <h1>Settings</h1>
 
-<button router-link routerLink="/settings">Settings</button>
-<button router-link routerLink="" class="btn-blue">Menu Principal</button>
+    <div class="mb-3">
+        <label for="difficulty" class="form-label">Difficulty Level</label>
+        <select 
+            id="difficulty" 
+            class="form-select" 
+            [value]="difficultyLevel()"
+            (change)="onDifficultyChange($event)"
+            aria-label="Select difficulty level">
+            @for (option of difficultyOptions; track option) {
+                <option [value]="option">{{ option }}</option>
+            }
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label for="storyMode" class="form-label">Story Progression Style</label>
+        <select 
+            id="storyMode" 
+            class="form-select" 
+            [value]="storyMode()"
+            (change)="onStoryModeChange($event)"
+            aria-label="Select story progression style">
+            @for (option of storyModeOptions; track option) {
+                <option [value]="option">{{ option }}</option>
+            }
+        </select>
+    </div>
+
+    <div class="mt-4">
+        <button router-link routerLink="/game" class="btn btn-primary me-2">Game</button>
+        <button router-link routerLink="" class="btn btn-secondary">Menu Principal</button>
+    </div>
 
 </Div>
