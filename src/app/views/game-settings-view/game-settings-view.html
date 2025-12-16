@@ -1,7 +1,50 @@
-<Div class="container-fluid d-flex flex-column justify-content-center">
-    <h1>Game</h1>
+<div class="container-fluid d-flex flex-column align-items-center justify-content-center min-vh-100">
+    <div class="settings-container">
+        <h1 class="mb-4 text-center">Settings</h1>
 
-<button router-link routerLink="/settings">Settings</button>
-<button router-link routerLink="" class="btn-blue">Menu Principal</button>
+        <div class="mb-4">
+            <label for="difficulty" class="form-label fw-bold">
+                <i class="bi bi-speedometer2"></i>
+                Difficulty Level
+            </label>
+            <select 
+                id="difficulty" 
+                class="form-select custom-select" 
+                [value]="difficultyLevel()"
+                (change)="onDifficultyChange($event)"
+                aria-label="Select difficulty level">
+                @for (option of difficultyOptions; track option) {
+                    <option [value]="option">{{ option }}</option>
+                }
+            </select>
+        </div>
 
-</Div>
+        <div class="mb-4">
+            <label for="storyMode" class="form-label fw-bold">
+                <i class="bi bi-palette"></i>
+                Story Progression Style
+            </label>
+            <select 
+                id="storyMode" 
+                class="form-select custom-select" 
+                [value]="storyMode()"
+                (change)="onStoryModeChange($event)"
+                aria-label="Select story progression style">
+                @for (option of storyModeOptions; track option) {
+                    <option [value]="option">{{ option }}</option>
+                }
+            </select>
+        </div>
+
+        <div class="mt-5 d-flex flex-column gap-3">
+            <button router-link routerLink="/game" class="nav-button primary-button">
+                <i class="bi bi-joystick"></i>
+                Start Game
+            </button>
+            <button router-link routerLink="" class="nav-button secondary-button">
+                <i class="bi bi-house"></i>
+                Main Menu
+            </button>
+        </div>
+    </div>
+</div>

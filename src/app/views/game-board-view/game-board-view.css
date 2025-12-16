@@ -1,0 +1,9 @@
+/* Component-specific styles - shared button styles are in shared-styles.css */
+@import '../shared-styles.css';
+
+.game-content {
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

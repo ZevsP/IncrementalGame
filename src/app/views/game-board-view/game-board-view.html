@@ -1,7 +1,19 @@
-<Div class="container-fluid d-flex flex-column justify-content-center">
-    <h1>Settings</h1>
+<div class="container-fluid d-flex flex-column align-items-center justify-content-center min-vh-100">
+    <h1 class="mb-5 text-center">Game Board</h1>
 
-<button router-link routerLink="/game">Game</button>
-<button router-link routerLink="" class="btn-blue">Menu Principal</button>
+    <div class="game-content mb-5">
+        <p class="text-center text-muted">Game content will be displayed here</p>
+    </div>
 
-</Div>
+    <div class="d-flex gap-3">
+        <button router-link routerLink="/settings" class="nav-button primary-button">
+            <i class="bi bi-gear"></i>
+            Settings
+        </button>
+        <button router-link routerLink="" class="nav-button secondary-button">
+            <i class="bi bi-house"></i>
+            Main Menu
+        </button>
+    </div>
+
+</div>
