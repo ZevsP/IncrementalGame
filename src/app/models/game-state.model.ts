@@ -9,9 +9,9 @@ import { Task } from './task.model';
 export interface GameTime {
   currentHour: number;       // 0-23
   currentMinute: number;     // 0-59
-  currentDay: number;        // 1-30
-  currentWeek: number;       // 1-4
-  currentMonth: number;      // month counter
+  currentDay: number;        // 1-7 (день недели)
+  currentWeek: number;       // 1-4 (неделя месяца)
+  currentMonth: number;      // счётчик месяцев
   cycleSpeed: number;        // множитель скорости игры
 }
 

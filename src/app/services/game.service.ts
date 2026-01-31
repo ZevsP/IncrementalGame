@@ -76,7 +76,7 @@ export class GameService {
   ): void {
     const player = createDefaultPlayer(playerName, gender, age, interests);
     
-    // Начальные комнаты - разблокированы спальня и санузел
+    // Начальные комнаты - разблокированы спальня, санузел, кухня и прихожая
     const rooms: Room[] = [
       createDefaultRoom('bedroom', true),
       createDefaultRoom('bathroom', true),
@@ -257,6 +257,13 @@ export class GameService {
   }
 
   setGameSpeed(speed: number): void {
+    const wasRunning = this.isRunning() && !this.isPaused();
+    
+    // Stop current tick if running
+    if (wasRunning) {
+      this.stopGameTick();
+    }
+    
     this.updateState(state => ({
       ...state,
       time: {
@@ -264,6 +271,11 @@ export class GameService {
         cycleSpeed: speed
       }
     }));
+    
+    // Restart tick with new speed
+    if (wasRunning) {
+      this.startGameTick();
+    }
   }
 
   private startGameTick(): void {

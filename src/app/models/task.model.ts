@@ -249,7 +249,7 @@ export const TASK_DEFINITIONS: TaskDefinition[] = [
     id: 'sleep',
     name: 'Sleep',
     nameRu: 'Спать',
-    description: 'Get a good night sleep',
+    description: 'Get a good night\'s sleep',
     category: 'personal',
     subcategory: 'sleep',
     roomType: 'bedroom',

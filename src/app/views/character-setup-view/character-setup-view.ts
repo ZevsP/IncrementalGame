@@ -74,9 +74,13 @@ export class CharacterSetupView {
     
     this.playerAge.set(Math.floor(Math.random() * (this.maxAge - this.minAge + 1)) + this.minAge);
     
+    // Fisher-Yates shuffle for proper randomization
     const allInterests = this.availableInterests.map(i => i.id);
-    const shuffled = allInterests.sort(() => Math.random() - 0.5);
-    this.selectedInterests.set(shuffled.slice(0, 2));
+    for (let i = allInterests.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [allInterests[i], allInterests[j]] = [allInterests[j], allInterests[i]];
+    }
+    this.selectedInterests.set(allInterests.slice(0, 2));
   }
   
   startGame(): void {

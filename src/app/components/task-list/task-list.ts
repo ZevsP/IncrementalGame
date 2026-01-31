@@ -29,7 +29,7 @@ export class TaskList {
     this.availableTasks().filter(t => t.category === 'social')
   );
   
-  startTask(task: Task): void {
+  performTask(task: Task): void {
     if (this.canPerformTask(task)) {
       this.gameService.completeTask(task.id);
     }

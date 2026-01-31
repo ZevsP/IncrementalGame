@@ -28,7 +28,7 @@
               class="task-card"
               [class]="getTaskStatusClass(task)"
               [disabled]="!canPerformTask(task)"
-              (click)="startTask(task)"
+              (click)="performTask(task)"
               [attr.aria-label]="task.nameRu">
               
               <div class="task-icon" [style.background-color]="getCategoryColor(task.category)">
@@ -69,7 +69,7 @@
               class="task-card"
               [class]="getTaskStatusClass(task)"
               [disabled]="!canPerformTask(task)"
-              (click)="startTask(task)"
+              (click)="performTask(task)"
               [attr.aria-label]="task.nameRu">
               
               <div class="task-icon" [style.background-color]="getCategoryColor(task.category)">
