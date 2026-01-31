@@ -1,0 +1,100 @@
+<div class="task-list">
+  <div class="panel-header">
+    <h2>
+      <i class="bi bi-list-task"></i>
+      Задания
+    </h2>
+    @if (activeRoom(); as room) {
+      <span class="room-context">{{ room.name }}</span>
+    }
+  </div>
+  
+  @if (availableTasks().length === 0) {
+    <div class="empty-state">
+      <i class="bi bi-inbox"></i>
+      <p>Выберите комнату для просмотра заданий</p>
+    </div>
+  } @else {
+    @if (personalTasks().length > 0) {
+      <div class="task-category">
+        <h3 class="category-header personal">
+          <i class="bi bi-person"></i>
+          Личные задания
+        </h3>
+        <div class="tasks-grid">
+          @for (task of personalTasks(); track task.id) {
+            <button 
+              type="button"
+              class="task-card"
+              [class]="getTaskStatusClass(task)"
+              [disabled]="!canPerformTask(task)"
+              (click)="startTask(task)"
+              [attr.aria-label]="task.nameRu">
+              
+              <div class="task-icon" [style.background-color]="getCategoryColor(task.category)">
+                <i [class]="'bi ' + getSubcategoryIcon(task.subcategory)"></i>
+              </div>
+              
+              <div class="task-info">
+                <h4 class="task-name">{{ task.nameRu }}</h4>
+                <div class="task-meta">
+                  <span class="task-subcategory">{{ getSubcategoryLabel(task.subcategory) }}</span>
+                  <span class="task-status" [class]="getTaskStatusClass(task)">
+                    {{ getTaskStatus(task) }}
+                  </span>
+                </div>
+              </div>
+              
+              @if (task.completedToday) {
+                <div class="task-check">
+                  <i class="bi bi-check-circle-fill"></i>
+                </div>
+              }
+            </button>
+          }
+        </div>
+      </div>
+    }
+    
+    @if (socialTasks().length > 0) {
+      <div class="task-category">
+        <h3 class="category-header social">
+          <i class="bi bi-people"></i>
+          Общественные задания
+        </h3>
+        <div class="tasks-grid">
+          @for (task of socialTasks(); track task.id) {
+            <button 
+              type="button"
+              class="task-card"
+              [class]="getTaskStatusClass(task)"
+              [disabled]="!canPerformTask(task)"
+              (click)="startTask(task)"
+              [attr.aria-label]="task.nameRu">
+              
+              <div class="task-icon" [style.background-color]="getCategoryColor(task.category)">
+                <i [class]="'bi ' + getSubcategoryIcon(task.subcategory)"></i>
+              </div>
+              
+              <div class="task-info">
+                <h4 class="task-name">{{ task.nameRu }}</h4>
+                <div class="task-meta">
+                  <span class="task-subcategory">{{ getSubcategoryLabel(task.subcategory) }}</span>
+                  <span class="task-status" [class]="getTaskStatusClass(task)">
+                    {{ getTaskStatus(task) }}
+                  </span>
+                </div>
+              </div>
+              
+              @if (task.completedToday) {
+                <div class="task-check">
+                  <i class="bi bi-check-circle-fill"></i>
+                </div>
+              }
+            </button>
+          }
+        </div>
+      </div>
+    }
+  }
+</div>

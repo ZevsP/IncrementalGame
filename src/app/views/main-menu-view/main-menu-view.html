@@ -1,15 +1,20 @@
 <div class="container-fluid d-flex flex-column align-items-center justify-content-center min-vh-100">
     
-    <h1 class="mb-5 text-center">Menu Principal</h1>
+    <h1 class="mb-5 text-center">Домашний Симулятор</h1>
+    <p class="subtitle mb-4">Управляйте домом и развивайте навыки</p>
 
     <div class="d-flex flex-column gap-3" style="width: 300px;">
-        <button router-link routerLink="/game" class="nav-button primary-button">
+        <button router-link routerLink="/setup" class="nav-button primary-button">
             <i class="bi bi-joystick"></i>
-            Start Game
+            Новая игра
         </button>
-        <button router-link routerLink="/settings" class="nav-button secondary-button">
+        <button router-link routerLink="/game" class="nav-button secondary-button">
+            <i class="bi bi-play-circle"></i>
+            Продолжить
+        </button>
+        <button router-link routerLink="/settings" class="nav-button tertiary-button">
             <i class="bi bi-gear"></i>
-            Settings
+            Настройки
         </button>
     </div>
 

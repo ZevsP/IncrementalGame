@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { GameBoardView } from '../game-board-view/game-board-view';
-import { GameSettingsView } from '../game-settings-view/game-settings-view';
 import { RouterLink } from '@angular/router';
 
 @Component({

@@ -1,9 +1,105 @@
-/* Component-specific styles - shared button styles are in shared-styles.css */
-@import '../shared-styles.css';
+/* Game board layout styles */
+
+.game-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #f0f2f5;
+}
 
 .game-content {
-  min-height: 200px;
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1fr;
+  gap: 20px;
+  padding: 20px;
+  max-height: calc(100vh - 80px);
+  overflow: hidden;
+}
+
+.left-panel,
+.center-panel,
+.right-panel {
+  overflow-y: auto;
+  max-height: 100%;
+}
+
+.no-game {
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.no-game-content {
+  text-align: center;
+  color: white;
+  padding: 40px;
+}
+
+.no-game-content i {
+  font-size: 80px;
+  margin-bottom: 24px;
+  opacity: 0.8;
+}
+
+.no-game-content h2 {
+  margin: 0 0 12px 0;
+  font-size: 32px;
+}
+
+.no-game-content p {
+  margin: 0 0 32px 0;
+  font-size: 18px;
+  opacity: 0.8;
+}
+
+.start-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 32px;
+  background: white;
+  color: #667eea;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.start-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 1200px) {
+  .game-content {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+  }
+  
+  .right-panel {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 768px) {
+  .game-content {
+    grid-template-columns: 1fr;
+    max-height: none;
+    overflow: visible;
+  }
+  
+  .left-panel,
+  .center-panel,
+  .right-panel {
+    max-height: none;
+    overflow: visible;
+  }
+  
+  .right-panel {
+    grid-column: auto;
+  }
 }
