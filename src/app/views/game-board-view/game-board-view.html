@@ -1,19 +1,31 @@
-<div class="container-fluid d-flex flex-column align-items-center justify-content-center min-vh-100">
-    <h1 class="mb-5 text-center">Game Board</h1>
-
-    <div class="game-content mb-5">
-        <p class="text-center text-muted">Game content will be displayed here</p>
+@if (gameState(); as state) {
+  <div class="game-layout">
+    <app-game-header />
+    
+    <main class="game-content">
+      <div class="left-panel">
+        <app-rooms-panel />
+      </div>
+      
+      <div class="center-panel">
+        <app-task-list />
+      </div>
+      
+      <div class="right-panel">
+        <app-player-panel />
+      </div>
+    </main>
+  </div>
+} @else {
+  <div class="no-game">
+    <div class="no-game-content">
+      <i class="bi bi-controller"></i>
+      <h2>Игра не запущена</h2>
+      <p>Создайте персонажа для начала игры</p>
+      <a routerLink="/setup" class="start-btn">
+        <i class="bi bi-play-fill"></i>
+        Создать персонажа
+      </a>
     </div>
-
-    <div class="d-flex gap-3">
-        <button router-link routerLink="/settings" class="nav-button primary-button">
-            <i class="bi bi-gear"></i>
-            Settings
-        </button>
-        <button router-link routerLink="" class="nav-button secondary-button">
-            <i class="bi bi-house"></i>
-            Main Menu
-        </button>
-    </div>
-
-</div>
+  </div>
+}

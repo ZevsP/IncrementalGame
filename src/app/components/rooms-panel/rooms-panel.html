@@ -1,0 +1,91 @@
+<div class="rooms-panel">
+  <div class="panel-header">
+    <h2>
+      <i class="bi bi-house-fill"></i>
+      Комнаты
+    </h2>
+  </div>
+  
+  <div class="rooms-grid">
+    @for (room of rooms(); track room.id) {
+      <button 
+        type="button"
+        class="room-card"
+        [class.active]="activeRoom()?.id === room.id"
+        [class.locked]="!room.isUnlocked"
+        [disabled]="!room.isUnlocked"
+        (click)="selectRoom(room)"
+        [attr.aria-label]="room.name + (room.isUnlocked ? '' : ' (заблокировано)')">
+        
+        <div class="room-icon">
+          @if (room.isUnlocked) {
+            <i [class]="'bi ' + getRoomIcon(room.type)"></i>
+          } @else {
+            <i class="bi bi-lock-fill"></i>
+          }
+        </div>
+        
+        <div class="room-info">
+          <h3 class="room-name">{{ room.name }}</h3>
+          @if (room.isUnlocked) {
+            <div class="room-meta">
+              <span class="room-area">{{ calculateArea(room) }} м²</span>
+              <span class="room-cleanliness" [class.low]="room.cleanliness < 50">
+                <i class="bi bi-stars"></i>
+                {{ room.cleanliness }}%
+              </span>
+            </div>
+          }
+        </div>
+      </button>
+    }
+  </div>
+  
+  @if (activeRoom(); as room) {
+    <div class="room-details">
+      <h3>
+        <i [class]="'bi ' + getRoomIcon(room.type)"></i>
+        {{ room.name }}
+      </h3>
+      
+      <div class="room-stats">
+        <div class="stat-item">
+          <span class="stat-label">Площадь:</span>
+          <span class="stat-value">{{ calculateArea(room) }} м²</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">Размеры:</span>
+          <span class="stat-value">{{ room.dimensions.width }}×{{ room.dimensions.length }} м</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">Окна:</span>
+          <span class="stat-value">{{ room.features.windows }}</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">Чистота:</span>
+          <span class="stat-value">{{ room.cleanliness }}%</span>
+        </div>
+      </div>
+      
+      <div class="room-abilities">
+        <h4>Возможности:</h4>
+        <div class="abilities-list">
+          @for (ability of getRoomAbilities(room.type); track ability) {
+            <span class="ability-badge">{{ getAbilityLabel(ability) }}</span>
+          }
+        </div>
+      </div>
+      
+      @if (room.features.furniture.length > 0) {
+        <div class="room-furniture">
+          <h4>Мебель:</h4>
+          <div class="furniture-list">
+            @for (item of room.features.furniture; track item) {
+              <span class="furniture-item">{{ item }}</span>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>

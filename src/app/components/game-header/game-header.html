@@ -1,0 +1,77 @@
+<header class="game-header">
+  <div class="header-left">
+    <a routerLink="/" class="logo" aria-label="На главную">
+      <i class="bi bi-house-door"></i>
+      <span>Дом</span>
+    </a>
+  </div>
+  
+  <div class="header-center">
+    <div class="time-display">
+      <div class="clock">
+        <i class="bi bi-clock"></i>
+        <span class="time">{{ formattedTime }}</span>
+      </div>
+      <div class="date-info">
+        <span class="day-of-week">{{ dayOfWeek }}</span>
+        <span class="day-info">{{ dayInfo }}</span>
+      </div>
+    </div>
+    
+    <div class="game-controls">
+      <button 
+        type="button"
+        class="control-btn"
+        [class.active]="isPaused()"
+        (click)="togglePause()"
+        [attr.aria-label]="isPaused() ? 'Продолжить' : 'Пауза'">
+        <i [class]="isPaused() ? 'bi bi-play-fill' : 'bi bi-pause-fill'"></i>
+      </button>
+      
+      <div class="speed-controls">
+        <button 
+          type="button"
+          class="speed-btn"
+          [class.active]="getCurrentSpeed() === 1"
+          (click)="setSpeed(1)"
+          aria-label="Скорость x1">
+          1x
+        </button>
+        <button 
+          type="button"
+          class="speed-btn"
+          [class.active]="getCurrentSpeed() === 2"
+          (click)="setSpeed(2)"
+          aria-label="Скорость x2">
+          2x
+        </button>
+        <button 
+          type="button"
+          class="speed-btn"
+          [class.active]="getCurrentSpeed() === 5"
+          (click)="setSpeed(5)"
+          aria-label="Скорость x5">
+          5x
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="header-right">
+    @if (player(); as p) {
+      <div class="quick-stats">
+        <span class="stat health" title="Здоровье">
+          <i class="bi bi-heart-fill"></i>
+          {{ p.stats.health | number:'1.0-0' }}
+        </span>
+        <span class="stat energy" title="Энергия">
+          <i class="bi bi-lightning-fill"></i>
+          {{ p.stats.energy | number:'1.0-0' }}
+        </span>
+      </div>
+    }
+    <a routerLink="/settings" class="settings-btn" aria-label="Настройки">
+      <i class="bi bi-gear"></i>
+    </a>
+  </div>
+</header>

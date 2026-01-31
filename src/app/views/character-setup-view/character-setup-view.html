@@ -1,0 +1,136 @@
+<div class="setup-container">
+  <div class="setup-card">
+    <div class="setup-header">
+      <h1>
+        <i class="bi bi-person-plus-fill"></i>
+        Создание персонажа
+      </h1>
+      <p>Настройте своего игрока для начала игры</p>
+    </div>
+    
+    <div class="setup-form">
+      <!-- Name input -->
+      <div class="form-group">
+        <label for="playerName" class="form-label">
+          <i class="bi bi-person"></i>
+          Имя персонажа
+        </label>
+        <input 
+          type="text" 
+          id="playerName" 
+          class="form-input"
+          [value]="playerName()"
+          (input)="onNameChange($event)"
+          placeholder="Введите имя..."
+          maxlength="20"
+          aria-describedby="nameHelp">
+        <small id="nameHelp" class="form-help">Минимум 2 символа</small>
+      </div>
+      
+      <!-- Gender selection -->
+      <div class="form-group">
+        <label class="form-label">
+          <i class="bi bi-gender-ambiguous"></i>
+          Пол
+        </label>
+        <div class="gender-options">
+          <button 
+            type="button"
+            class="gender-btn"
+            [class.active]="playerGender() === 'male'"
+            (click)="onGenderChange('male')"
+            aria-label="Мужской">
+            <i class="bi bi-gender-male"></i>
+            Мужской
+          </button>
+          <button 
+            type="button"
+            class="gender-btn"
+            [class.active]="playerGender() === 'female'"
+            (click)="onGenderChange('female')"
+            aria-label="Женский">
+            <i class="bi bi-gender-female"></i>
+            Женский
+          </button>
+        </div>
+      </div>
+      
+      <!-- Age slider -->
+      <div class="form-group">
+        <label for="playerAge" class="form-label">
+          <i class="bi bi-calendar"></i>
+          Возраст: <strong>{{ playerAge() }} лет</strong>
+        </label>
+        <input 
+          type="range" 
+          id="playerAge" 
+          class="form-range"
+          [value]="playerAge()"
+          (input)="onAgeChange($event)"
+          [min]="minAge"
+          [max]="maxAge"
+          aria-describedby="ageHelp">
+        <div class="age-labels">
+          <span>{{ minAge }}</span>
+          <span>{{ maxAge }}</span>
+        </div>
+        <small id="ageHelp" class="form-help">
+          @switch (true) {
+            @case (playerAge() < 13) { Роль: Помощник (сын/дочь) }
+            @case (playerAge() < 18) { Роль: Подросток }
+            @case (playerAge() < 30) { Роль: Взрослый }
+            @default { Роль: Родитель }
+          }
+        </small>
+      </div>
+      
+      <!-- Interests -->
+      <div class="form-group">
+        <label class="form-label">
+          <i class="bi bi-star"></i>
+          Интересы (выберите до 3)
+        </label>
+        <div class="interests-grid">
+          @for (interest of availableInterests; track interest.id) {
+            <button 
+              type="button"
+              class="interest-btn"
+              [class.active]="isInterestSelected(interest.id)"
+              [disabled]="!isInterestSelected(interest.id) && selectedInterests().length >= 3"
+              (click)="toggleInterest(interest.id)"
+              [attr.aria-label]="interest.label"
+              [attr.aria-pressed]="isInterestSelected(interest.id)">
+              <i [class]="'bi ' + interest.icon"></i>
+              <span>{{ interest.label }}</span>
+            </button>
+          }
+        </div>
+      </div>
+    </div>
+    
+    <div class="setup-actions">
+      <button 
+        type="button"
+        class="btn btn-secondary"
+        (click)="randomize()">
+        <i class="bi bi-shuffle"></i>
+        Случайный
+      </button>
+      <button 
+        type="button"
+        class="btn btn-primary"
+        [disabled]="!canStartGame()"
+        (click)="startGame()">
+        <i class="bi bi-play-fill"></i>
+        Начать игру
+      </button>
+    </div>
+    
+    <div class="setup-footer">
+      <a routerLink="/" class="back-link">
+        <i class="bi bi-arrow-left"></i>
+        Вернуться в меню
+      </a>
+    </div>
+  </div>
+</div>

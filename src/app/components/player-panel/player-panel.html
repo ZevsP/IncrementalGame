@@ -1,0 +1,84 @@
+@if (player(); as p) {
+  <div class="player-panel">
+    <div class="panel-header">
+      <h2>
+        <i class="bi bi-person-fill"></i>
+        Игрок
+      </h2>
+    </div>
+    
+    <div class="player-info">
+      <div class="player-avatar">
+        <i [class]="'bi ' + getGenderIcon(p.gender)"></i>
+      </div>
+      <div class="player-details">
+        <h3 class="player-name">{{ p.name }}</h3>
+        <div class="player-meta">
+          <span class="player-age">{{ p.age }} лет</span>
+          <span class="player-role">{{ getRoleDisplay(p.role) }}</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="player-interests">
+      <h4>Интересы</h4>
+      <div class="interests-list">
+        @for (interest of p.interests; track interest) {
+          <span class="interest-badge" [title]="getInterestLabel(interest)">
+            <i [class]="'bi ' + getInterestIcon(interest)"></i>
+          </span>
+        }
+      </div>
+    </div>
+    
+    <div class="player-stats">
+      <h4>Статистика</h4>
+      
+      <app-stat-bar 
+        label="Здоровье" 
+        [value]="p.stats.health" 
+        icon="bi-heart-fill"
+        color="#e91e63" />
+      
+      <app-stat-bar 
+        label="Энергия" 
+        [value]="p.stats.energy" 
+        icon="bi-lightning-fill"
+        color="#ff9800" />
+      
+      <app-stat-bar 
+        label="Гигиена" 
+        [value]="p.stats.hygiene" 
+        icon="bi-droplet-fill"
+        color="#2196f3" />
+      
+      <app-stat-bar 
+        label="Знания" 
+        [value]="p.stats.knowledge" 
+        icon="bi-book-fill"
+        color="#9c27b0" />
+      
+      <app-stat-bar 
+        label="Творчество" 
+        [value]="p.stats.creativity" 
+        icon="bi-palette-fill"
+        color="#ff5722" />
+      
+      <app-stat-bar 
+        label="Выносливость" 
+        [value]="p.stats.endurance" 
+        icon="bi-bicycle"
+        color="#4caf50" />
+      
+      <app-stat-bar 
+        label="Удовлетворённость" 
+        [value]="p.stats.satisfaction" 
+        icon="bi-emoji-smile-fill"
+        color="#ffc107" />
+    </div>
+  </div>
+} @else {
+  <div class="player-panel empty">
+    <p>Игрок не создан</p>
+  </div>
+}
